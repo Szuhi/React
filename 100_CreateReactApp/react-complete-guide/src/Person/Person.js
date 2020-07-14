@@ -2,8 +2,14 @@
 import React from 'react';
 
 // Using ES6 for its features and to make the useage of 'this' easier
-const person = () => {
-    return <p>I'm a Person and I am {Math.floor(Math.random() * 30)} years old!</p>
+// props.children refers to anything that is between the passing object's open and closing part
+const person = (props) => {
+    return (
+        <div>
+            <p>I'm {props.name} and I am {props.age} years old!</p>
+            <p>{props.children}</p>
+        </div>
+    )
 }
 
 export default person;
