@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import './App.css';
 // Don't need "Person.js" -> the build takes care of that + 'Person' must be uppercase after the import
 import Person from './Person/Person';
+import person from './Person/Person';
 
+// Mantra of React - Everything is JavaScript
 // This is not HTML, but JSX - JavaScript at runtime
 // It has limitations, e.g.: class cannot be used, that's why we need to use className instead
 // It is typical to use one root element to return, just like below - even though it is not a strict limitation
@@ -49,6 +51,7 @@ class App extends Component {
   }
 
   // .bind() syntax is prefered, the other can be inefficient
+  // At rerender everything is being executed not just the return
   render() {
     const style = {
       backgroundColor: 'white',
@@ -58,6 +61,26 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person 
+            name={this.state.persons[0].name} 
+            age={this.state.persons[0].age}/>
+          <Person 
+            name={this.state.persons[1].name} 
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, 'Max!')}
+            changed={this.nameChangedHandler}>My Hobbies: Racing</Person>
+          <Person 
+            name={this.state.persons[2].name} 
+            age={this.state.persons[2].age}/>
+        </div>
+      );
+    }
+
     // What we write here in the end will be js. We cannot use block statements like if-else etc.
     return (
       <div className="App">
@@ -65,22 +88,8 @@ class App extends Component {
         <p>This is really working!</p>
         <button
           style={style} 
-          onClick={this.togglePersonsHandler}>Toggle Persons</button>
-        { this.state.showPersons === true ? 
-          <div>
-            <Person 
-              name={this.state.persons[0].name} 
-              age={this.state.persons[0].age}/>
-            <Person 
-              name={this.state.persons[1].name} 
-              age={this.state.persons[1].age}
-              click={this.switchNameHandler.bind(this, 'Max!')}
-              changed={this.nameChangedHandler}>My Hobbies: Racing</Person>
-            <Person 
-              name={this.state.persons[2].name} 
-              age={this.state.persons[2].age}/>
-          </div> : null
-        }
+          onClick={this.togglePersonsHandler}>Toggle Persons</button> 
+        {persons}
       </div>
     );
     //return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App!!!'));
