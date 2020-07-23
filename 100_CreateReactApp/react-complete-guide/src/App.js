@@ -23,17 +23,6 @@ class App extends Component {
     showPersons: false
   }
 
-  switchNameHandler = (newName) => {
-    //console.log('Clicked!');
-    // DON'T DO THIS: this.state.persons[0].name = 'Maximilan';
-    // This is a merge, will leave any other state untouched
-    this.setState({persons: [
-      { name: newName, age: 28},
-      { name: 'Manu', age: 29},
-      { name: 'Stephanie', age: 27}
-    ]});
-  }
-
   nameChangedHandler = (event) => {
     this.setState({
       persons: [
@@ -42,6 +31,15 @@ class App extends Component {
         { name: 'Stephanie', age: 27}
       ]
     });
+  }
+
+  // Delete one and update the state
+  // We use a copy (with the spread operator, .slice() is the older) of the state instead of the real one to avoid certain flaws - this is best practice
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons]
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons})
   }
 
   // Previous false warning will appear in the console because that's the moment when React renders the div
@@ -66,8 +64,9 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
+          {this.state.persons.map((person, index) => {
             return <Person 
+                click={() => this.deletePersonHandler(index)}
                 name={person.name} 
                 age={person.age}/>
           })}
