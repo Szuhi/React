@@ -15,22 +15,33 @@ import person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      { name: 'Max', age: 28},
-      { name: 'Manu', age: 29},
-      { name: 'Stephanie', age: 26}
+      { id: '1', name: 'Max', age: 28},
+      { id: '2', name: 'Manu', age: 29},
+      { id: '3', name: 'Stephanie', age: 26}
     ],
     otherState: 'some other value',
     showPersons: false
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { id: '1', name: 'Max', age: 28},
-        { id: '2', name: event.target.value, age: 29},
-        { id: '3', name: 'Stephanie', age: 27}
-      ]
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
     });
+
+    // Don't mutate directly because it is a reference type! - Using spread operator
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+    // Alternative:
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+
+    // This is already the copy
+    person.name = event.target.value;
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    // At this point we have an updated array, so we can do the update - and it will remove all the warnings as well
+    this.setState({persons: persons});
   }
 
   // Delete one and update the state
@@ -69,7 +80,8 @@ class App extends Component {
                 click={() => this.deletePersonHandler(index)}
                 name={person.name} 
                 age={person.age}
-                key={person.id} />
+                key={person.id} 
+                changed={(event) => this.nameChangedHandler(event, person.id)} />
           })}
         </div>
       );
