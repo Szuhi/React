@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   switchNameHandler = () => {
-    console.log('Clicked!');
+    //console.log('Clicked!');
     // DON'T DO THIS: this.state.persons[0].name = 'Maximilan';
     // This is a merge, will leave any other state untouched
     this.setState({persons: [
