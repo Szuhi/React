@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 // Don't need "Person.js" -> the build takes care of that + 'Person' must be uppercase after the import
 import Person from './Person/Person';
-import person from './Person/Person';
+import Radium from 'radium';
 
 // Mantra of React - Everything is JavaScript
 // This is not HTML, but JSX - JavaScript at runtime
@@ -68,7 +68,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -88,6 +92,10 @@ class App extends Component {
       );
 
       style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
     //let classes = ['red', 'bold'].join(' ');
@@ -114,4 +122,5 @@ class App extends Component {
   }
 }
 
-export default App;
+// Radium is a higher order component
+export default Radium(App);

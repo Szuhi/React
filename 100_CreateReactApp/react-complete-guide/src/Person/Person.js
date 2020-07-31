@@ -1,6 +1,7 @@
 // We don't need a component here, since we are not going to use classes
 import React from 'react';
 import './Person.css';
+import Radium from 'radium';
 
 // Using ES6 for its features and to make the useage of 'this' easier
 // props.children refers to anything that is between the passing object's open and closing part
@@ -14,4 +15,4 @@ const person = (props) => {
     )
 }
 
-export default person;
+export default Radium(person);
