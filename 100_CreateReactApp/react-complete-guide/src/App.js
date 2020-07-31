@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 // Don't need "Person.js" -> the build takes care of that + 'Person' must be uppercase after the import
 import Person from './Person/Person';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 
 // Mantra of React - Everything is JavaScript
 // This is not HTML, but JSX - JavaScript at runtime
@@ -109,14 +109,16 @@ class App extends Component {
 
     // What we write here in the end will be js. We cannot use block statements like if-else etc.
     return (
-      <div className="App">
-        <h1>Hi, I'm a React App</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
-        <button
-          style={style} 
-          onClick={this.togglePersonsHandler}>Toggle Persons</button> 
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, I'm a React App</h1>
+          <p className={classes.join(' ')}>This is really working!</p>
+          <button
+            style={style} 
+            onClick={this.togglePersonsHandler}>Toggle Persons</button> 
+          {persons}
+        </div>
+      </StyleRoot>
     );
     //return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App!!!'));
   }
