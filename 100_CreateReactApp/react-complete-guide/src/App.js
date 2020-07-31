@@ -4,6 +4,22 @@ import './App.css';
 // Don't need "Person.js" -> the build takes care of that + 'Person' must be uppercase after the import
 import Person from './Person/Person';
 //import Radium, { StyleRoot } from 'radium';
+import styled from 'styled-components';
+
+// Inside we have css syntax
+const StyledButton = styled.button`
+  background-color: green;
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lightgreen;
+    color: black;
+  }
+`;
 
 // Mantra of React - Everything is JavaScript
 // This is not HTML, but JSX - JavaScript at runtime
@@ -112,9 +128,9 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p className={classes.join(' ')}>This is really working!</p>
-        <button
-          style={style} 
-          onClick={this.togglePersonsHandler}>Toggle Persons</button> 
+        <StyledButton
+          //style={style} 
+          onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton> 
         {persons}
       </div>
     );

@@ -21,11 +21,11 @@ const StyleDiv = styled.div`
 // Using ES6 for its features and to make the useage of 'this' easier
 // props.children refers to anything that is between the passing object's open and closing part
 const person = (props) => {
-    const style = {
+/*     const style = {
         '@media (min-width: 500px)': {
             width: '450px'
         }
-    };
+    }; */
 
     return (
         //<div className="Person" style={style}>
