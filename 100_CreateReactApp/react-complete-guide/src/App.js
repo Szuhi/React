@@ -63,7 +63,8 @@ class App extends Component {
   // At rerender everything is being executed not just the return
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -85,6 +86,8 @@ class App extends Component {
           })}
         </div>
       );
+
+      style.backgroundColor = 'red';
     }
 
     // What we write here in the end will be js. We cannot use block statements like if-else etc.
